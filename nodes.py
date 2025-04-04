@@ -1293,8 +1293,8 @@ def common_ksampler(model, seed, steps, cfg, sampler_name, scheduler, positive, 
 	noise_mask = None
 	if "noise_mask" in latent:
 		noise_mask = latent["noise_mask"]
-
-        callback = latent_preview.prepare_callback(model, steps)
+	
+	callback = latent_preview.prepare_callback(model, steps)
 	samples = comfy.sample.sample(model, noise, steps, cfg, sampler_name, scheduler, positive, negative, latent_image,
 								  denoise=denoise, disable_noise=True, start_step=start_step, last_step=last_step,
 								  force_full_denoise=False, noise_mask=noise_mask, callback=callback)
