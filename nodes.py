@@ -12,6 +12,7 @@ import os
 import hashlib
 import requests
 import json
+import latent_preview
 # import piexif
 # import piexif.helper
 
