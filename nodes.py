@@ -168,7 +168,7 @@ def handle_drawthings(params):
 		return pos, neg
 
 
-class GreyScale:
+class LykosGreyScale:
 	@classmethod
 	def INPUT_TYPES(s):
 		return {
@@ -189,7 +189,7 @@ class GreyScale:
 		rgbimg.paste(gimg)
 		return conv_pil_tensor(rgbimg)
 
-class Equalize:
+class LykosEqualize:
 	@classmethod
 	def INPUT_TYPES(s):
 		return {
@@ -207,7 +207,7 @@ class Equalize:
 		cimg = conv_tensor_pil(IMAGE)
 		return conv_pil_tensor(ImageOps.equalize(cimg))
 
-class AutoContrast:
+class LykosAutoContrast:
 	@classmethod
 	def INPUT_TYPES(s):
 		return {
@@ -230,7 +230,7 @@ class AutoContrast:
 		else:
 			return conv_pil_tensor(ImageOps.autocontrast(cimg, cutoff=cutoff))
 
-class ResizeFactor:
+class LykosResizeFactor:
 	@classmethod
 	def INPUT_TYPES(s):
 		return {
@@ -252,7 +252,7 @@ class ResizeFactor:
 		sampler = get_pil_resampler(resampler)
 		return conv_pil_tensor(cimg.resize((w, h), resample=sampler))
 
-class BlendImages:
+class LykosBlendImages:
 	@classmethod
 	def INPUT_TYPES(s):
 		return {
@@ -288,7 +288,7 @@ class BlendImages:
 		# Finally, blend the two
 		return conv_pil_tensor(Image.blend(img_a, img_b, blend))
 
-class GaussianBlur:
+class LykosGaussianBlur:
 	@classmethod
 	def INPUT_TYPES(s):
 		return {
@@ -309,7 +309,7 @@ class GaussianBlur:
 		# Finally, blend the two
 		return conv_pil_tensor(img.filter(ImageFilter.GaussianBlur(blur_radius)))
 
-class PowerImage:
+class LykosPowerImage:
 	@classmethod
 	def INPUT_TYPES(s):
 		return {
@@ -357,7 +357,7 @@ class PowerImage:
 
 		return conv_pil_tensor(cimg)
 
-class ImageContrast:
+class LykosImageContrast:
 	@classmethod
 	def INPUT_TYPES(s):
 		return {
@@ -390,7 +390,7 @@ class ImageContrast:
 
 		return conv_pil_tensor(cimg)
 
-class PlasmaNoise:
+class LykosPlasmaNoise:
 	@classmethod
 	def INPUT_TYPES(s):
 		return {
@@ -624,7 +624,7 @@ class PlasmaNoise:
 		pbar.update_absolute(step, 4)
 		return conv_pil_tensor(outimage)
 
-class RandNoise:
+class LykosRandNoise:
 	@classmethod
 	def INPUT_TYPES(s):
 		return {
@@ -782,7 +782,7 @@ class RandNoise:
 
 		return conv_pil_tensor(outimage)
 
-class GreyNoise:
+class LykosGreyNoise:
 	@classmethod
 	def INPUT_TYPES(s):
 		return {
@@ -941,7 +941,7 @@ class GreyNoise:
 
 		return conv_pil_tensor(outimage)
 
-class PinkNoise:
+class LykosPinkNoise:
 	@classmethod
 	def INPUT_TYPES(s):
 		return {
@@ -1099,7 +1099,7 @@ class PinkNoise:
 
 		return conv_pil_tensor(outimage)
 
-class BrownNoise:
+class LykosBrownNoise:
 	@classmethod
 	def INPUT_TYPES(s):
 		return {
@@ -1303,7 +1303,7 @@ def common_ksampler(model, seed, steps, cfg, sampler_name, scheduler, positive, 
 	out["samples"] = samples
 	return (out, )
 
-class PlasmaSampler:
+class LykosPlasmaSampler:
 	@classmethod
 	def INPUT_TYPES(s):
 		return {
@@ -1334,7 +1334,7 @@ class PlasmaSampler:
 			rand = True
 		return common_ksampler(model, noise_seed, steps, cfg, sampler_name, scheduler, positive, negative, latent_image, denoise, latent_noise, use_rand=rand)
 
-class LoadImagePath:
+class LykosLoadImagePath:
 	@classmethod
 	def INPUT_TYPES(s):
 		return {
@@ -1393,7 +1393,7 @@ class LoadImagePath:
 
 		return True
 
-class LoadImagePathWithMetadata:
+class LykosLoadImagePathWithMetadata:
 	@classmethod
 	def INPUT_TYPES(s):
 		return {
@@ -1486,39 +1486,39 @@ class LoadImagePathWithMetadata:
 		return True
 
 NODE_CLASS_MAPPINGS = {
-	"JDC_Plasma": PlasmaNoise,
-	"JDC_RandNoise": RandNoise,
-	"JDC_GreyNoise": GreyNoise,
-	"JDC_PinkNoise": PinkNoise,
-	"JDC_BrownNoise": BrownNoise,
-	"JDC_PlasmaSampler": PlasmaSampler,
-	"JDC_PowerImage": PowerImage,
-	"JDC_Contrast": ImageContrast,
-	"JDC_Greyscale": GreyScale,
-	"JDC_EqualizeGrey": Equalize,
-	"JDC_AutoContrast": AutoContrast,
-	"JDC_ResizeFactor": ResizeFactor,
-	"JDC_BlendImages": BlendImages,
-	"JDC_GaussianBlur": GaussianBlur,
-	"JDC_ImageLoader": LoadImagePath,
-	"JDC_ImageLoaderMeta": LoadImagePathWithMetadata
+	"Lykos_JDC_Plasma": LykosPlasmaNoise,
+	"Lykos_JDC_RandNoise": LykosRandNoise,
+	"Lykos_JDC_GreyNoise": LykosGreyNoise,
+	"Lykos_JDC_PinkNoise": LykosPinkNoise,
+	"Lykos_JDC_BrownNoise": LykosBrownNoise,
+	"Lykos_JDC_PlasmaSampler": LykosPlasmaSampler,
+	"Lykos_JDC_PowerImage": LykosPowerImage,
+	"Lykos_JDC_Contrast": LykosImageContrast,
+	"Lykos_JDC_Greyscale": LykosGreyScale,
+	"Lykos_JDC_EqualizeGrey": LykosEqualize,
+	"Lykos_JDC_AutoContrast": LykosAutoContrast,
+	"Lykos_JDC_ResizeFactor": LykosResizeFactor,
+	"Lykos_JDC_BlendImages": LykosBlendImages,
+	"Lykos_JDC_GaussianBlur": LykosGaussianBlur,
+	"Lykos_JDC_ImageLoader": LykosLoadImagePath,
+	"Lykos_JDC_ImageLoaderMeta": LykosLoadImagePathWithMetadata
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-	"JDC_Plasma": "Plasma Noise",
-	"JDC_RandNoise": "Random Noise",
-	"JDC_GreyNoise": "Greyscale Noise",
-	"JDC_PinkNoise": "Pink Noise",
-	"JDC_BrownNoise": "Brown Noise",
-	"JDC_PlasmaSampler": "Plasma KSampler",
-	"JDC_PowerImage": "Image To The Power Of",
-	"JDC_Contrast": "Brightness & Contrast",
-	"JDC_Greyscale": "RGB to Greyscale",
-	"JDC_EqualizeGrey": "Equalize Histogram",
-	"JDC_AutoContrast": "AutoContrast",
-	"JDC_ResizeFactor": "Resize Image by Factor",
-	"JDC_BlendImages": "Blend Images",
-	"JDC_GaussianBlur": "Gaussian Blur",
-	"JDC_ImageLoader": "Load Image From Path",
-	"JDC_ImageLoaderMeta": "Load Image From Path With Meta"
+	"Lykos_JDC_Plasma": "Plasma Noise",
+	"Lykos_JDC_RandNoise": "Random Noise",
+	"Lykos_JDC_GreyNoise": "Greyscale Noise",
+	"Lykos_JDC_PinkNoise": "Pink Noise",
+	"Lykos_JDC_BrownNoise": "Brown Noise",
+	"Lykos_JDC_PlasmaSampler": "Plasma KSampler",
+	"Lykos_JDC_PowerImage": "Image To The Power Of",
+	"Lykos_JDC_Contrast": "Brightness & Contrast",
+	"Lykos_JDC_Greyscale": "RGB to Greyscale",
+	"Lykos_JDC_EqualizeGrey": "Equalize Histogram",
+	"Lykos_JDC_AutoContrast": "AutoContrast",
+	"Lykos_JDC_ResizeFactor": "Resize Image by Factor",
+	"Lykos_JDC_BlendImages": "Blend Images",
+	"Lykos_JDC_GaussianBlur": "Gaussian Blur",
+	"Lykos_JDC_ImageLoader": "Load Image From Path",
+	"Lykos_JDC_ImageLoaderMeta": "Load Image From Path With Meta"
 }

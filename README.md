@@ -1,5 +1,8 @@
+Fork of [comfy-plasma by Jordach](https://github.com/Jordach/comfy-plasma/). Added sampler progress preview & updated node names to not conflict with the original.
+
 # comfy-plasma
 A simple plasma noise generator for ComfyUI. Other noise generators may appear over time.
+
 
 # Usage:
 ## Plasma Noise:
